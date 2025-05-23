@@ -38,7 +38,7 @@ const Header = () => {
           aria-label="Favorites"
         >
           <Badge badgeContent={favorites.length} color="secondary">
-            <FavoriteIcon />
+            <FavoriteIcon sx={{width: "1.2em", height: "1.2em"}} />
           </Badge>
         </IconButton>
       </Toolbar>

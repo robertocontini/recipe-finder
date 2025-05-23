@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { RecipeCardProps } from "../../types";
 import FavoriteButton from "../Favorite/FavoriteButton";
@@ -21,7 +16,7 @@ const RecipeCard = ({
         display: "flex",
         flexDirection: "column",
         position: "relative",
-        paddingTop: "100%",
+        overflow: "hidden"
       }}
     >
       <CardMedia
@@ -30,10 +25,12 @@ const RecipeCard = ({
         alt={recipe.strMeal}
         loading={isAboveTheFold ? "eager" : "lazy"}
         sx={{
-          aspectRatio: 1 / 1,
-          position: "absolute",
-          top: 0,
-          left: 0,
+          aspectRatio: 1,
+          transition: "transform 0.2s ease-out",
+          willChange: "transform",
+          "&:hover": {
+            transform: "scale(1.05)",
+          },
         }}
       />
 
@@ -70,9 +67,13 @@ const RecipeCard = ({
         )}
       </CardContent>
 
-      <FavoriteButton recipe={recipe} isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
+      <FavoriteButton
+        recipe={recipe}
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+      />
     </Card>
   );
-}
+};
 
 export default React.memo(RecipeCard);
