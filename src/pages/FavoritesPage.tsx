@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useFavorites } from "../hooks/useFavorites";
 import { Recipe } from "../types";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
+import theme from "src/theme/theme";
 
 const FavoritesPage: React.FC = () => {
   const { favorites, isFavorite, toggle } = useFavorites();
@@ -37,7 +38,7 @@ const FavoritesPage: React.FC = () => {
         variant="h5"
         gutterBottom
         sx={{
-          backgroundImage: "linear-gradient(to right, #8334c2, #00748b)",
+          backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
         }}

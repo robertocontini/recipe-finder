@@ -12,8 +12,7 @@ const Header = () => {
     <AppBar
       position="sticky"
       sx={{
-        backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`
-
+        backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -23,8 +22,8 @@ const Header = () => {
             to="/"
             color="inherit"
             sx={{
-              textDecoration: location.pathname === "/" ? "underline" : "none",
               fontWeight: "bold",
+              backgroundColor: "rgba(0,0,0, .1)",
             }}
           >
             Recipe Finder

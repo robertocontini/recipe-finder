@@ -7,6 +7,7 @@ import Loader from "../components/Loader";
 import { fetchRecipeById } from "../services/api";
 import FavoriteButton from "src/components/Favorite/FavoriteButton";
 import { useFavorites } from "src/hooks/useFavorites";
+import theme from "src/theme/theme";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -52,7 +53,7 @@ const RecipeDetailPage = () => {
 
   if (error) {
     return (
-      <Container sx={{ mt: 4, mb: 4}} component="section" role="alert">
+      <Container sx={{ mt: 4, mb: 4 }} component="section" role="alert">
         <Typography variant="h4" component="h1" color="error" gutterBottom>
           Errore
         </Typography>
@@ -73,7 +74,16 @@ const RecipeDetailPage = () => {
       {recipe && (
         <Container component="article" sx={{ mt: 4 }}>
           <header>
-            <Typography component="h1" variant="h4" gutterBottom>
+            <Typography
+              component="h1"
+              variant="h5"
+              gutterBottom
+              sx={{
+                backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >
               {recipe.strMeal}
             </Typography>
 
