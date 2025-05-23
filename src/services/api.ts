@@ -1,10 +1,13 @@
+import { recipeCountries } from "src/mocks/recipe";
 import { Recipe } from "../types";
 
-const baseUrlApi = process.env.REACT_APP_BASE_URL_API
+const baseUrlApi = process.env.REACT_APP_BASE_URL_API;
 
-export const fetchPopularRecipes = async (): Promise<Recipe[]> => {
-  // filtering on italian category
-  const response = await fetch(`${baseUrlApi}/filter.php?a=Italian`);
+export const fetchCountriesRecipes = async (): Promise<Recipe[]> => {
+  const countryCategory =
+    recipeCountries[Math.floor(Math.random() * recipeCountries.length)];
+
+  const response = await fetch(`${baseUrlApi}/filter.php?a=${countryCategory}`);
 
   if (!response.ok) {
     throw new Error("Errore nella risposta del server");
@@ -19,8 +22,9 @@ export const fetchPopularRecipes = async (): Promise<Recipe[]> => {
   return data.meals || [];
 };
 
-
-export const fetchRecipesByTextSearch = async (searchTerm: string): Promise<Recipe[]> => {
+export const fetchRecipesByTextSearch = async (
+  searchTerm: string
+): Promise<Recipe[]> => {
   const response = await fetch(`${baseUrlApi}/search.php?s=${searchTerm}`);
 
   const data = await response.json();

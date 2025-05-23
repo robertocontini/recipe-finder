@@ -52,7 +52,7 @@ const RecipeDetailPage = () => {
 
   if (error) {
     return (
-      <Container sx={{ mt: 4 }} component="section" role="alert">
+      <Container sx={{ mt: 4, mb: 4}} component="section" role="alert">
         <Typography variant="h4" component="h1" color="error" gutterBottom>
           Errore
         </Typography>

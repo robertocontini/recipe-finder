@@ -7,3 +7,12 @@ export const mockRecipe = {
   strCategory: "Seafood",
   strArea: "Portuguese",
 };
+
+export const recipeCountries = [
+  "British",
+  "Canadian",
+  "Greek",
+  "Italian",
+  "Japanese",
+  "Portuguese",
+];
