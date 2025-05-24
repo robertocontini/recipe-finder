@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import { toggleFavorite } from '../store/favoritesSlice';
 
-export function useFavorites() {
+export const useFavorites = () => {
   const favorites = useSelector((state: RootState) => state.favorites);
   const dispatch = useDispatch();
 

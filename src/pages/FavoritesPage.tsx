@@ -1,11 +1,10 @@
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { useAboveTheFoldCount } from "../hooks/useAboveTheFold";
 import { useEffect, useState } from "react";
 import { useFavorites } from "../hooks/useFavorites";
 import { Recipe } from "../types";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
-import theme from "src/theme/theme";
 import PageTitle from "src/components/PageTitle/PageTitle";
 
 const FavoritesPage = () => {
@@ -36,7 +35,8 @@ const FavoritesPage = () => {
     <Container sx={{ mt: 4, mb: 4 }}>
       {recipes.length ? (
         <>
-          <PageTitle title="I tuoi favoriti." />
+          <PageTitle title="I tuoi favoriti" />
+          
           <Grid container spacing={2} sx={{ mt: 2 }}>
             {recipes.map((recipe, index) => (
               <Grid size={{ xs: 12, sm: 6, md: 4 }} key={recipe.idMeal}>
@@ -51,7 +51,7 @@ const FavoritesPage = () => {
           </Grid>
         </>
       ) : (
-        <PageTitle title="Non hai ricette salvate nei favoriti." />
+        <PageTitle title="Non hai ricette salvate nei favoriti" />
       )}
     </Container>
   );

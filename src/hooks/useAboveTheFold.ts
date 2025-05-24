@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export function useAboveTheFoldCount(): number {
+export const useAboveTheFoldCount = (): number => {
   const [count, setCount] = useState(getAboveTheFoldCount())
 
   function getAboveTheFoldCount() {

@@ -27,5 +27,9 @@ export type SearchBarProps = {
 
 export type PageTitleProps = {
   title: string;
-  sx?: SxProps
 };
+
+export type Ingredient = {
+  name: string;
+  measure: string
+}

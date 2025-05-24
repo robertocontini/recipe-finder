@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Container, Typography, Box, Button, Chip } from "@mui/material";
+import { Container, Typography, Box, Button, Chip, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Recipe } from "../types";
 import { fetchRecipeById } from "../services/api";
 import FavoriteButton from "src/components/FavoriteButton/FavoriteButton";
 import { useFavorites } from "src/hooks/useFavorites";
-import theme from "src/theme/theme";
 import Loader from "src/components/Loader/Loader";
+import PageTitle from "src/components/PageTitle/PageTitle";
+import { useIngredients } from "src/hooks/useIngredients";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -33,28 +34,12 @@ const RecipeDetailPage = () => {
     id && fetchRecipe();
   }, [id]);
 
-  // TODO:
-  const getIngredients = () => {
-    const ingredients: { name: string; measure: string }[] = [];
-
-    for (let i = 1; i <= 20; i++) {
-      const name = recipe && recipe[`strIngredient${i}`];
-      const measure = recipe && recipe[`strMeasure${i}`];
-
-      if (name && name.trim()) {
-        ingredients.push({ name, measure: measure ?? "" });
-      }
-    }
-
-    return ingredients;
-  };
-
-  const ingredients = getIngredients();
+  const ingredients = useIngredients(recipe!);
 
   if (error) {
     return (
       <Container sx={{ mt: 4, mb: 4 }} component="section" role="alert">
-        <Typography variant="h4" component="h1" color="error" gutterBottom>
+        <Typography variant="h5" component="h1" color="error" gutterBottom>
           Errore
         </Typography>
 
@@ -72,115 +57,103 @@ const RecipeDetailPage = () => {
   return (
     <main>
       {recipe && (
-        <Container component="article" sx={{ mt: 4 }}>
-          <header>
-            <Typography
-              component="h1"
-              variant="h5"
-              gutterBottom
-              sx={{
-                backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              {recipe.strMeal}
-            </Typography>
+        <>
+          <Container sx={{ mt: 4 }}>
+            <Grid container spacing={2} sx={{ mb: 4 }}>
+              <Grid size={{ xs: 12 }}>
+                <PageTitle title={recipe.strMeal} />
+              </Grid>
 
-            <Box
-              component="figure"
-              sx={{
-                width: "100%",
-                maxWidth: 700,
-                aspectRatio: "1/1",
-                margin: 0,
-                position: "relative",
-              }}
-            >
-              <img
-                src={recipe?.strMealThumb}
-                alt={`Foto della ricetta ${recipe.strMeal}`}
-                loading="eager"
-                width={700}
-                height={700}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  borderRadius: "4px",
+              <Grid
+                size={{ xs: 12, md: 6 }}
+                sx={{
+                  marginRight: { md: "20px" },
+                  position: { md: "sticky" },
+                  top: { md: 100 },
+                  alignSelf: { md: "start" },
                 }}
-              />
+              >
+                <img
+                  src={recipe?.strMealThumb}
+                  alt={`Foto della ricetta ${recipe.strMeal}`}
+                  loading="eager"
+                  style={{
+                    aspectRatio: 1,
+                    width: "100%",
+                    objectFit: "cover",
+                    borderRadius: "10px",
+                  }}
+                />
 
-              <FavoriteButton
-                recipe={recipe}
-                isFavorite={isFavorite(recipe.idMeal)}
-                onToggleFavorite={toggle}
-              />
+                <FavoriteButton
+                  recipe={recipe}
+                  isFavorite={isFavorite(recipe.idMeal)}
+                  onToggleFavorite={toggle}
+                />
+              </Grid>
 
-              <figcaption style={{ display: "none" }}>
-                {recipe.strMeal}
-              </figcaption>
-            </Box>
-          </header>
-
-          <section
-            aria-labelledby="ingredients-title"
-            style={{ marginTop: 24 }}
-          >
-            <Typography
-              variant="h5"
-              component="h2"
-              id="ingredients-title"
-              gutterBottom
-            >
-              Ingredienti
-            </Typography>
-
-            <Box component="ul" sx={{ pl: 3 }}>
-              {ingredients.map((ingredient) => (
-                <li key={ingredient.name}>
-                  <Typography component="span">
-                    {ingredient.measure} {ingredient.name}
+              <Grid size={{ xs: 12, md: 5 }}>
+                <section
+                  aria-labelledby="ingredients-title"
+                  style={{ marginTop: 5, marginBottom: 30 }}
+                >
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    id="ingredients-title"
+                    gutterBottom
+                  >
+                    Ingredienti
                   </Typography>
-                </li>
-              ))}
-            </Box>
-          </section>
 
-          <section aria-labelledby="info-title" style={{ marginTop: 16 }}>
-            <Typography
-              variant="h5"
-              component="h2"
-              id="info-title"
-              gutterBottom
-            >
-              Informazioni
-            </Typography>
+                  <Box component="ul" sx={{ pl: 3 }}>
+                    {ingredients.map((ingredient) => (
+                      <li key={ingredient.name}>
+                        <Typography component="span">
+                          {ingredient.measure} {ingredient.name}
+                        </Typography>
+                      </li>
+                    ))}
+                  </Box>
+                </section>
 
-            <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-              <Chip label={`Categoria: ${recipe.strCategory}`} />
-              <Chip label={`Area: ${recipe.strArea}`} />
-            </Box>
-          </section>
+                <section
+                  aria-labelledby="info-title"
+                  style={{ marginBottom: 30 }}
+                >
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    id="info-title"
+                    gutterBottom
+                  >
+                    Informazioni
+                  </Typography>
 
-          <section
-            aria-labelledby="instructions-title"
-            style={{ margin: "24px 0" }}
-          >
-            <Typography
-              variant="h5"
-              component="h2"
-              id="instructions-title"
-              gutterBottom
-            >
-              Istruzioni
-            </Typography>
+                  <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                    <Chip label={`Categoria: ${recipe.strCategory}`} />
+                    <Chip label={`Area: ${recipe.strArea}`} />
+                  </Box>
+                </section>
 
-            <Typography component="p" sx={{ whiteSpace: "pre-line" }}>
-              {recipe.strInstructions}
-            </Typography>
-          </section>
-        </Container>
+                <section aria-labelledby="instructions-title">
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    id="instructions-title"
+                    gutterBottom
+                  >
+                    Istruzioni
+                  </Typography>
+
+                  <Typography component="p" sx={{ whiteSpace: "pre-line" }}>
+                    {recipe.strInstructions}
+                  </Typography>
+                </section>
+              </Grid>
+            </Grid>
+          </Container>
+        </>
       )}
     </main>
   );

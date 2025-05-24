@@ -47,11 +47,12 @@ const RecipeCard = ({
             width: "100%",
             backgroundColor: "rgba(255, 255, 255, .8)",
             "&:last-child": {
-              paddingBottom: "12px"
-            }
+              paddingBottom: "12px",
+            },
           }}
         >
           <Typography
+            component="p"
             variant="h6"
             sx={{
               textDecoration: "none",
@@ -65,7 +66,11 @@ const RecipeCard = ({
           </Typography>
 
           {recipe.strCategory && (
-            <Typography color="secondary.dark" variant="overline" sx={{ textTransform: "uppercase" }}>
+            <Typography
+              color="secondary.dark"
+              variant="overline"
+              sx={{ textTransform: "uppercase" }}
+            >
               {recipe.strCategory}
             </Typography>
           )}

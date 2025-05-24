@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Container, Grid } from "@mui/material";
 import SearchBar from "../components/SearchBar/SearchBar";
 import {
@@ -37,19 +37,16 @@ const HomePage = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <SearchBar
-        value={search}
-        onChange={setSearch}
-      />
+      <SearchBar value={search} onChange={setSearch} />
 
-      <Box sx={{marginBottom: 4}}></Box>
+      <Box sx={{ marginBottom: 4 }}></Box>
 
       {loading && <Loader />}
 
-      {!search && (
-        <>
-          <PageTitle title="Ricette dal mondo" />
-        </>
+      {!search && <PageTitle title="Ricette dal mondo" />}
+
+      {search && recipes.length === 0 && (
+        <PageTitle title="Nessuna ricetta trovata" />
       )}
 
       <Grid container spacing={2} sx={{ mb: 4 }}>
