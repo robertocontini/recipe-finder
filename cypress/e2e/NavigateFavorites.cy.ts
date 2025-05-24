@@ -26,7 +26,7 @@ describe("Favorites page", () => {
 
     cy.get(`[aria-label="Vai alla ricetta ${strMeal}"]`).should("not.exist");
 
-    cy.get("p").contains("Non hai ricette salvate nei favoriti.");
+    cy.get("h1").contains("Non hai ricette salvate nei favoriti");
 
     cy.get(".MuiBadge-badge").should("not.be.visible");
   });
