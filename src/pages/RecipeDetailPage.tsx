@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { Container, Typography, Box, Button, Chip } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Recipe } from "../types";
-import Loader from "../components/Loader";
 import { fetchRecipeById } from "../services/api";
 import FavoriteButton from "src/components/Favorite/FavoriteButton";
 import { useFavorites } from "src/hooks/useFavorites";
 import theme from "src/theme/theme";
+import Loader from "src/components/Loader/Loader";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();

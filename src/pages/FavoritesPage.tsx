@@ -7,7 +7,7 @@ import { Recipe } from "../types";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
 import theme from "src/theme/theme";
 
-const FavoritesPage: React.FC = () => {
+const FavoritesPage = () => {
   const { favorites, isFavorite, toggle } = useFavorites();
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const aboveTheFoldCount = useAboveTheFoldCount();

@@ -3,6 +3,7 @@ import { Box, CircularProgress } from "@mui/material";
 const Loader = () => {
   return (
     <Box
+      aria-label="loading-overlay"
       sx={{
         position: "fixed",
         top: 0,

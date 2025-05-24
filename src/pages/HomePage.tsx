@@ -5,8 +5,8 @@ import { fetchCountriesRecipes, fetchRecipesByTextSearch } from "../services/api
 import { useAboveTheFoldCount } from "../hooks/useAboveTheFold";
 import { useFavorites } from "../hooks/useFavorites";
 import { Recipe } from "../types";
-import Loader from "../components/Loader";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
+import Loader from "src/components/Loader/Loader";
 
 const HomePage = () => {
   const [search, setSearch] = useState<string>("");
