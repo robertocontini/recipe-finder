@@ -1,7 +1,7 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { RecipeCardProps } from "../../types";
-import FavoriteButton from "../Favorite/FavoriteButton";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import React from "react";
 import theme from "src/theme/theme";
 

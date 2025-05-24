@@ -1,13 +1,3 @@
-// export type Meal = {
-//   idMeal: string;
-//   strMeal: string;
-//   strMealThumb: string;
-//   strInstructions: string;
-//   strCategory: string;
-//   strArea: string;
-//   [key: string]: string | null;
-// };
-
 export interface Recipe {
   idMeal: string;
   strMeal: string;
