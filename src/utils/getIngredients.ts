@@ -1,6 +1,6 @@
 import { Ingredient, Recipe } from "src/types";
 
-export const useIngredients = (recipe: Recipe): Ingredient[] => {
+export const getIngredients = (recipe: Recipe): Ingredient[] => {
   const ingredients: { name: string; measure: string }[] = [];
 
   for (let i = 1; i <= 20; i++) {

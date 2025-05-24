@@ -8,8 +8,8 @@ import FavoriteButton from "src/components/FavoriteButton/FavoriteButton";
 import { useFavorites } from "src/hooks/useFavorites";
 import Loader from "src/components/Loader/Loader";
 import PageTitle from "src/components/PageTitle/PageTitle";
-import { useIngredients } from "src/hooks/useIngredients";
 import theme from "src/theme/theme";
+import { getIngredients } from "src/utils/getIngredients";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -35,7 +35,7 @@ const RecipeDetailPage = () => {
     id && fetchRecipe();
   }, [id]);
 
-  const ingredients = useIngredients(recipe!);
+  const ingredients = getIngredients(recipe!);
 
   if (error) {
     return (
@@ -69,7 +69,7 @@ const RecipeDetailPage = () => {
                 size={{ xs: 12, md: 5 }}
                 sx={{
                   marginRight: { md: "20px" },
-                  position: { md: "sticky" },
+                  position: { xs: "relative", md: "sticky" },
                   top: { md: 100 },
                   alignSelf: { md: "start" },
                 }}
@@ -101,7 +101,7 @@ const RecipeDetailPage = () => {
                     border: `2px solid ${theme.palette.primary.main}`,
                     display: "inline-block",
                     borderRadius: "10px",
-                    padding: "25px 30px 10px 30px",
+                    padding: "20px 30px 10px 30px",
                   }}
                 >
                   <Typography
