@@ -2,21 +2,20 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import FavoriteButton from "./FavoriteButton";
 import { mockRecipe } from "src/mocks/recipe";
 
-
-
 const renderComponent = (isFavorite = false, onToggleFavorite = jest.fn()) => {
   return render(
-      <FavoriteButton
-        recipe={mockRecipe}
-        isFavorite={isFavorite}
-        onToggleFavorite={onToggleFavorite}
-      />
+    <FavoriteButton
+      recipe={mockRecipe}
+      isFavorite={isFavorite}
+      onToggleFavorite={onToggleFavorite}
+    />
   );
 };
 
 describe("FavoriteButton", () => {
   it("shows outlined heart icon when not favorites", () => {
     renderComponent();
+
     expect(
       screen.getByLabelText(`Aggiungi ${mockRecipe.strMeal} ai favoriti`)
     ).toBeInTheDocument();
@@ -25,6 +24,7 @@ describe("FavoriteButton", () => {
 
   it("shows filled heart icon when in favorites", () => {
     renderComponent(true);
+
     expect(
       screen.getByLabelText(`Rimuovi ${mockRecipe.strMeal} dai favoriti`)
     ).toBeInTheDocument();
@@ -49,11 +49,11 @@ describe("FavoriteButton", () => {
     const { rerender } = renderComponent();
 
     rerender(
-        <FavoriteButton
-          recipe={mockRecipe}
-          isFavorite={true}
-          onToggleFavorite={jest.fn()}
-        />
+      <FavoriteButton
+        recipe={mockRecipe}
+        isFavorite={true}
+        onToggleFavorite={jest.fn()}
+      />
     );
 
     expect(screen.getByTestId("FavoriteIcon")).toBeInTheDocument();

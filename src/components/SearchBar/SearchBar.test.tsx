@@ -9,10 +9,12 @@ describe("SearchBar", () => {
   it("renders the search input with correct label and aria-label", () => {
     renderComponent();
 
-    const input = screen.getByLabelText(/cerca una ricetta per nome/i);
+    const input = screen.getByRole("textbox", {
+      name: "Cerca una ricetta per nome",
+    });
     expect(input).toBeInTheDocument();
 
-    const label = screen.getByLabelText(/cerca ricetta/i);
+    const label = screen.getByLabelText("Cerca ricetta");
     expect(label).toBeInTheDocument();
   });
 
@@ -24,15 +26,17 @@ describe("SearchBar", () => {
 
   it("shows the value passed as prop", () => {
     renderComponent("Portuguese");
-    const input = screen.getByDisplayValue("Portuguese");
-    expect(input).toBeInTheDocument();
+    const input = screen.getByRole("textbox", {
+      name: "Cerca una ricetta per nome",
+    });
+    expect((input as HTMLInputElement).value).toBe("Portuguese");
   });
 
   it("calls onChange callback each time user types a character", () => {
     const handleChange = jest.fn();
     renderComponent("", handleChange);
 
-    const input = screen.getByLabelText(/cerca una ricetta per nome/i);
+    const input = screen.getByLabelText("Cerca una ricetta per nome");
     const value = "sardines";
 
     for (let i = 1; i <= value.length; i++) {

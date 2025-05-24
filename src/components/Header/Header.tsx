@@ -6,7 +6,6 @@ import theme from "src/theme/theme";
 
 const Header = () => {
   const { favorites } = useFavorites();
-  const location = useLocation();
 
   return (
     <AppBar
@@ -21,6 +20,7 @@ const Header = () => {
             component={RouterLink}
             to="/"
             color="inherit"
+            aria-label="Homepage"
             sx={{
               fontWeight: "bold",
               backgroundColor: "rgba(0,0,0, .1)",
