@@ -1,8 +1,13 @@
 # recipe-finder
-Find recipes by entering ingredients or keyword, and save them in your favorites.
+Find recipes by text search, and save them in your favorites.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-and use Typescript, Redux, Jest and Cypress for testing
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+
+The stack:
+- Typescript
+- Redux Toolkit
+- Jest and Cypress for testing
+- TheMealDB (themealdb.com) for the recipe API.
 
 ## Available Scripts
 

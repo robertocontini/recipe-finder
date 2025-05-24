@@ -12,11 +12,9 @@ const loadInitialState = (): string[] => {
   }
 };
 
-const initialState: string[] = loadInitialState();
-
 const favoritesSlice = createSlice({
   name: "favorites",
-  initialState,
+  initialState: loadInitialState(),
   reducers: {
     toggleFavorite(state, action: PayloadAction<string>) {
       const id = action.payload;
