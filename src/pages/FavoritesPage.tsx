@@ -6,6 +6,7 @@ import { useFavorites } from "../hooks/useFavorites";
 import { Recipe } from "../types";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
 import theme from "src/theme/theme";
+import PageTitle from "src/components/PageTitle/PageTitle";
 
 const FavoritesPage = () => {
   const { favorites, isFavorite, toggle } = useFavorites();
@@ -33,36 +34,24 @@ const FavoritesPage = () => {
 
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-      <Typography
-        component="h1"
-        variant="h5"
-        gutterBottom
-        sx={{
-          backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
-        Le tue ricette preferite
-      </Typography>
-
-      {recipes.length === 0 ? (
-        <Typography variant="body1">
-          Non hai ricette salvate nei favoriti.
-        </Typography>
+      {recipes.length ? (
+        <>
+          <PageTitle title="I tuoi favoriti." />
+          <Grid container spacing={2} sx={{ mt: 2 }}>
+            {recipes.map((recipe, index) => (
+              <Grid size={{ xs: 12, sm: 6, md: 4 }} key={recipe.idMeal}>
+                <RecipeCard
+                  recipe={recipe}
+                  isFavorite={isFavorite(recipe.idMeal)}
+                  onToggleFavorite={toggle}
+                  isAboveTheFold={index < aboveTheFoldCount}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </>
       ) : (
-        <Grid container spacing={2} sx={{ mt: 2 }}>
-          {recipes.map((recipe, index) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={recipe.idMeal}>
-              <RecipeCard
-                recipe={recipe}
-                isFavorite={isFavorite(recipe.idMeal)}
-                onToggleFavorite={toggle}
-                isAboveTheFold={index < aboveTheFoldCount}
-              />
-            </Grid>
-          ))}
-        </Grid>
+        <PageTitle title="Non hai ricette salvate nei favoriti." />
       )}
     </Container>
   );

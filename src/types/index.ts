@@ -1,4 +1,6 @@
-export interface Recipe {
+import { SxProps } from "@mui/material";
+
+export type Recipe = {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
@@ -18,7 +20,12 @@ export type FavoriteProps = {
   onToggleFavorite: (id: string) => void;
 }
 
-export interface SearchBarProps {
+export type SearchBarProps = {
   value: string;
   onChange: (value: string) => void;
 }
+
+export type PageTitleProps = {
+  title: string;
+  sx?: SxProps
+};

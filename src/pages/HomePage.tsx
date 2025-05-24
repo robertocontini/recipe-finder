@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid } from "@mui/material";
+import { Box, Container, Grid } from "@mui/material";
 import SearchBar from "../components/SearchBar/SearchBar";
-import { fetchCountriesRecipes, fetchRecipesByTextSearch } from "../services/api";
+import {
+  fetchCountriesRecipes,
+  fetchRecipesByTextSearch,
+} from "../services/api";
 import { useAboveTheFoldCount } from "../hooks/useAboveTheFold";
 import { useFavorites } from "../hooks/useFavorites";
 import { Recipe } from "../types";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
 import Loader from "src/components/Loader/Loader";
+import PageTitle from "src/components/PageTitle/PageTitle";
 
 const HomePage = () => {
   const [search, setSearch] = useState<string>("");
@@ -33,14 +37,22 @@ const HomePage = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <SearchBar value={search} onChange={setSearch}  />
+      <SearchBar
+        value={search}
+        onChange={setSearch}
+      />
+
+      <Box sx={{marginBottom: 4}}></Box>
 
       {loading && <Loader />}
 
-      {/* {TODO: pagetitle dinamico} */}
+      {!search && (
+        <>
+          <PageTitle title="Ricette dal mondo" />
+        </>
+      )}
 
-      <Grid container spacing={2} sx={{ mt: 4, mb: 4 }}>
-        
+      <Grid container spacing={2} sx={{ mb: 4 }}>
         {recipes.map((recipe, index) => (
           <Grid size={{ xs: 12, sm: 6, md: 4, lg: 3 }} key={recipe.idMeal}>
             <RecipeCard
