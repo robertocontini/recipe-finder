@@ -9,6 +9,7 @@ import { useFavorites } from "src/hooks/useFavorites";
 import Loader from "src/components/Loader/Loader";
 import PageTitle from "src/components/PageTitle/PageTitle";
 import { useIngredients } from "src/hooks/useIngredients";
+import theme from "src/theme/theme";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -65,7 +66,7 @@ const RecipeDetailPage = () => {
               </Grid>
 
               <Grid
-                size={{ xs: 12, md: 6 }}
+                size={{ xs: 12, md: 5 }}
                 sx={{
                   marginRight: { md: "20px" },
                   position: { md: "sticky" },
@@ -92,10 +93,16 @@ const RecipeDetailPage = () => {
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, md: 5 }}>
+              <Grid size={{ xs: 12, md: 6 }}>
                 <section
                   aria-labelledby="ingredients-title"
-                  style={{ marginTop: 5, marginBottom: 30 }}
+                  style={{
+                    marginBottom: 30,
+                    border: `2px solid ${theme.palette.primary.main}`,
+                    display: "inline-block",
+                    borderRadius: "10px",
+                    padding: "25px 30px 10px 30px",
+                  }}
                 >
                   <Typography
                     variant="h5"
