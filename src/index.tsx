@@ -11,12 +11,15 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
+const basename =
+  process.env.NODE_ENV === "production" ? "/EXP/recipe-finder" : "/";
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <BrowserRouter>
+        <BrowserRouter basename={basename}>
           <App />
         </BrowserRouter>
       </ThemeProvider>

@@ -46,7 +46,7 @@ const RecipeDetailPage = () => {
 
         <Typography component={"p"}>{error}</Typography>
 
-        <Button component={RouterLink} to="/" variant="outlined">
+        <Button component={RouterLink} to="/" variant="outlined" sx={{ mt: 4 }}>
           Torna alla home
         </Button>
       </Container>

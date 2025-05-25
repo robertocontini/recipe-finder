@@ -1,5 +1,6 @@
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { Link as RouterLink } from "react-router-dom";
 import { useAboveTheFoldCount } from "../hooks/useAboveTheFold";
 import { useEffect, useState } from "react";
 import { useFavorites } from "../hooks/useFavorites";
@@ -63,7 +64,18 @@ const FavoritesPage = () => {
           </Grid>
         </>
       ) : (
-        <PageTitle title="Non hai ricette salvate nei favoriti" />
+        <>
+          <PageTitle title="Non hai ricette salvate nei favoriti" />
+
+          <Button
+            component={RouterLink}
+            to="/"
+            variant="outlined"
+            sx={{ mt: 4 }}
+          >
+            Torna alla home
+          </Button>
+        </>
       )}
     </Container>
   );

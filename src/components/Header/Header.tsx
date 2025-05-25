@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, IconButton, Badge, Box, Button } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 import { useFavorites } from "../../hooks/useFavorites";
 import theme from "src/theme/theme";
 
