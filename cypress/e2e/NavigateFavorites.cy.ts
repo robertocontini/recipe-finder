@@ -29,5 +29,9 @@ describe("Favorites page", () => {
     cy.get("h1").contains("Non hai ricette salvate nei favoriti");
 
     cy.get(".MuiBadge-badge").should("not.be.visible");
+
+    cy.get("a").contains("Torna alla home").click();
+
+    cy.url().should("include", "/");
   });
 });

@@ -30,7 +30,7 @@ const HomePage = () => {
         setRecipes(res);
         setLoading(false);
       });
-    }, 500);
+    }, 300);
 
     return () => clearTimeout(delayDebounce);
   }, [search]);
@@ -43,7 +43,7 @@ const HomePage = () => {
 
       {loading && <Loader />}
 
-      {!search && <PageTitle title="Ricette dal mondo" />}
+      {!search && !loading && <PageTitle title="Ricette dal mondo" />}
 
       {search && recipes.length === 0 && (
         <PageTitle title="Nessuna ricetta trovata" />
