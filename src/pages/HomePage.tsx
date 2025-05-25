@@ -24,7 +24,7 @@ const HomePage = () => {
       setLoading(true);
 
       const fetchContent =
-        search.length > 1 ? fetchRecipesByTextSearch : fetchCountriesRecipes;
+        search.length > 0 ? fetchRecipesByTextSearch : fetchCountriesRecipes;
 
       fetchContent(search).then((res) => {
         setRecipes(res);
