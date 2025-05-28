@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Container, Typography, Box, Button, Chip, Grid } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import { Recipe } from "../types";
-import { fetchRecipeById } from "../services/api";
+import { fetchRecipeById, fetchRecipeRandom } from "../services/api";
 import FavoriteButton from "src/components/FavoriteButton/FavoriteButton";
 import { useFavorites } from "src/hooks/useFavorites";
 import Loader from "src/components/Loader/Loader";
@@ -14,6 +14,7 @@ import { getIngredients } from "src/utils/getIngredients";
 const RecipeDetailPage = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState<Recipe | null>(null);
+  const [recipeRandom, setRecipeRandom] = useState<Recipe | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const { isFavorite, toggle } = useFavorites();
@@ -31,9 +32,24 @@ const RecipeDetailPage = () => {
         setLoading(false);
       }
     };
+    
+    const fetchRecipeBottom = async () => {
+        try {
+          setError(null);
+          setLoading(true);
+          const data = await fetchRecipeRandom();
+          setRecipeRandom(data);
+        } catch (err) {
+          setError((err as Error).message);
+        } finally {
+          setLoading(false);
+        }
+      };
 
     id && fetchRecipe();
+    fetchRecipeBottom()
   }, [id]);
+
 
   const ingredients = getIngredients(recipe!);
 
@@ -51,7 +67,7 @@ const RecipeDetailPage = () => {
         </Button>
       </Container>
     );
-  }
+  }      
 
   if (loading) return <Loader />;
 
@@ -156,6 +172,21 @@ const RecipeDetailPage = () => {
                   <Typography component="p" sx={{ whiteSpace: "pre-line" }}>
                     {recipe.strInstructions}
                   </Typography>
+                </section>
+
+                <section>
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    id="instructions-title"
+                    gutterBottom
+                  >
+                    Random Recipe
+                  </Typography>
+
+                  <RouterLink to={`/recipe/${recipeRandom?.idMeal}`}>
+                    {recipeRandom?.strMeal}
+                  </RouterLink>
                 </section>
               </Grid>
             </Grid>

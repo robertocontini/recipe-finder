@@ -40,6 +40,21 @@ export const fetchRecipeById = async (id: string): Promise<Recipe> => {
 
   const data = await response.json();
 
+  if (!data.meals || data.meals.length === 0 || data.meals === "Invalid ID") {
+    throw new Error("Ricetta non trovata");
+  }
+
+  return data.meals[0];
+};
+
+export const fetchRecipeRandom = async (): Promise<Recipe> => {
+  const response = await fetch(`${baseUrlApi}/random.php`);
+  if (!response.ok) {
+    throw new Error("Errore nella risposta del server");
+  }
+
+  const data = await response.json();
+
   if (!data.meals || data.meals.length === 0) {
     throw new Error("Ricetta non trovata");
   }
